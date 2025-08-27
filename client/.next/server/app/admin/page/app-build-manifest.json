@@ -1,0 +1,21 @@
+{
+  "pages": {
+    "/admin/page": [
+      "static/chunks/252f0_next_dist_84a4f456._.js",
+      "static/chunks/sandbox_SECURITY_SIP_client_app_favicon_ico_mjs_167bbd34._.js",
+      "static/chunks/[root-of-the-server]__4c350baa._.css",
+      "static/chunks/252f0_next_dist_ce548e87._.js",
+      "static/chunks/sandbox_SECURITY_SIP_client_app_layout_tsx_7079c68f._.js",
+      "static/chunks/252f0_next_dist_client_components_builtin_global-error_eff87725.js",
+      "static/chunks/[turbopack]_browser_dev_hmr-client_hmr-client_ts_b346b75c._.js",
+      "static/chunks/252f0_next_dist_compiled_react-dom_5b7ec348._.js",
+      "static/chunks/252f0_next_dist_compiled_next-devtools_index_528c751d.js",
+      "static/chunks/252f0_next_dist_compiled_a455282d._.js",
+      "static/chunks/252f0_next_dist_client_cc68d310._.js",
+      "static/chunks/252f0_next_dist_11f403d2._.js",
+      "static/chunks/252f0_@swc_helpers_cjs_aa4faa20._.js",
+      "static/chunks/sandbox_SECURITY_SIP_client_a0ff3932._.js",
+      "static/chunks/turbopack-sandbox_SECURITY_SIP_client_921b06d2._.js"
+    ]
+  }
+}
