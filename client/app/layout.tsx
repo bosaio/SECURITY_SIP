@@ -1,34 +1,28 @@
-import { Geist, Geist_Mono } from "next/font/google";
-import "./globals.css";
-import Header from "../components/header";
-import { Metadata } from "next";
+import type { Metadata } from "next"
+import { Inter } from "next/font/google"
+import "./globals.css"
+import Header from "@/components/header"
+import { Toaster } from "sonner"
 
-const geist = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
+const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
-  title: "Security SIP - Application & Information Security",
-  description: "Documenting a transition into Application and Information Security. Follow my journey from Fullstack developer to cybersecurity.",
-};
+  title: "Security SIP - Cybersecurity Blog",
+  description: "Your trusted source for cybersecurity insights, best practices, and industry updates.",
+}
 
 export default function RootLayout({
   children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+}: {
+  children: React.ReactNode
+}) {
   return (
     <html lang="en">
-      <body className={`${geist.variable} ${geistMono.variable} antialiased`}>
+      <body className={inter.className}>
         <Header />
-        {children}
+        <main>{children}</main>
+        <Toaster position="top-right" />
       </body>
     </html>
-  );
+  )
 }

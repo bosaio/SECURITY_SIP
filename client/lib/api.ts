@@ -1,10 +1,8 @@
 import axios from 'axios'
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'
-
-// Create axios instance
+// Create axios instance with base configuration
 const api = axios.create({
-  baseURL: API_BASE_URL,
+  baseURL: process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000/api',
   headers: {
     'Content-Type': 'application/json',
   },
@@ -24,7 +22,7 @@ api.interceptors.request.use(
   }
 )
 
-// Response interceptor to handle errors
+// Response interceptor for error handling
 api.interceptors.response.use(
   (response) => response,
   (error) => {
@@ -40,58 +38,55 @@ api.interceptors.response.use(
 // Auth API
 export const authAPI = {
   login: async (email: string, password: string) => {
-    const response = await api.post('/api/auth/login', { email, password })
+    const response = await api.post('/auth/login', { email, password })
     return response.data
   },
-
-  register: async (email: string, name: string, password: string) => {
-    const response = await api.post('/api/auth/register', { email, name, password })
+  
+  register: async (userData: any) => {
+    const response = await api.post('/auth/register', userData)
     return response.data
   },
-
+  
   getCurrentUser: async () => {
-    const response = await api.get('/api/auth/me')
+    const response = await api.get('/auth/me')
     return response.data
-  },
-
-  logout: () => {
-    localStorage.removeItem('authToken')
   }
 }
 
 // Posts API
 export const postsAPI = {
-  getAll: async (filters?: any) => {
-    const params = new URLSearchParams()
-    if (filters) {
-      Object.entries(filters).forEach(([key, value]) => {
-        if (value !== undefined && value !== null) {
-          params.append(key, String(value))
-        }
-      })
-    }
-    
-    const response = await api.get(`/api/posts?${params.toString()}`)
+  getAll: async (params?: any) => {
+    const response = await api.get('/posts', { params })
     return response.data
   },
-
+  
   getById: async (id: number) => {
-    const response = await api.get(`/api/posts/${id}`)
+    const response = await api.get(`/posts/${id}`)
     return response.data
   },
-
+  
   create: async (postData: any) => {
-    const response = await api.post('/api/posts', postData)
+    const response = await api.post('/posts', postData)
     return response.data
   },
-
+  
   update: async (id: number, postData: any) => {
-    const response = await api.put(`/api/posts/${id}`, postData)
+    const response = await api.put(`/posts/${id}`, postData)
     return response.data
   },
-
+  
   delete: async (id: number) => {
-    const response = await api.delete(`/api/posts/${id}`)
+    const response = await api.delete(`/posts/${id}`)
+    return response.data
+  },
+  
+  publish: async (id: number) => {
+    const response = await api.patch(`/posts/${id}/publish`)
+    return response.data
+  },
+  
+  unpublish: async (id: number) => {
+    const response = await api.patch(`/posts/${id}/unpublish`)
     return response.data
   }
 }
@@ -99,20 +94,40 @@ export const postsAPI = {
 // Categories API
 export const categoriesAPI = {
   getAll: async () => {
-    const response = await api.get('/api/categories')
+    const response = await api.get('/categories')
+    return response.data
+  },
+  
+  create: async (categoryData: any) => {
+    const response = await api.post('/categories', categoryData)
+    return response.data
+  },
+  
+  update: async (id: number, categoryData: any) => {
+    const response = await api.put(`/categories/${id}`, categoryData)
+    return response.data
+  },
+  
+  delete: async (id: number) => {
+    const response = await api.delete(`/categories/${id}`)
     return response.data
   }
 }
 
 // Users API
 export const usersAPI = {
-  getProfile: async () => {
-    const response = await api.get('/api/users/profile')
+  getAll: async () => {
+    const response = await api.get('/users')
     return response.data
   },
-
-  getAll: async () => {
-    const response = await api.get('/api/users')
+  
+  getById: async (id: number) => {
+    const response = await api.get(`/users/${id}`)
+    return response.data
+  },
+  
+  update: async (id: number, userData: any) => {
+    const response = await api.put(`/users/${id}`, userData)
     return response.data
   }
 }

@@ -1,6 +1,11 @@
+'use client'
+
 import Link from "next/link"
+import { useState } from "react"
 
 export default function Header() {
+  const [isMenuOpen, setIsMenuOpen] = useState(false)
+
   return (
     <header className="bg-white shadow-sm border-b border-gray-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -14,6 +19,7 @@ export default function Header() {
             </Link>
           </div>
           
+          {/* Desktop Navigation */}
           <nav className="hidden md:flex space-x-8">
             <Link href="/" className="text-gray-600 hover:text-gray-900 transition-colors">
               Home
@@ -24,11 +30,79 @@ export default function Header() {
             <Link href="/about" className="text-gray-600 hover:text-gray-900 transition-colors">
               About
             </Link>
-            <Link href="/auth/signin" className="text-gray-600 hover:text-gray-900 transition-colors">
-              Sign In
-            </Link>
+            <a href="http://localhost:3333" target="_blank" rel="noopener noreferrer" className="text-gray-600 hover:text-gray-900 transition-colors">
+              Studio
+            </a>
           </nav>
+
+          {/* Mobile Menu Button */}
+          <button
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            className="md:hidden p-2 rounded-md text-gray-600 hover:text-gray-900 hover:bg-gray-100 transition-colors"
+            aria-label="Toggle menu"
+          >
+            <svg
+              className="w-6 h-6"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              {isMenuOpen ? (
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M6 18L18 6M6 6l12 12"
+                />
+              ) : (
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M4 6h16M4 12h16M4 18h16"
+                />
+              )}
+            </svg>
+          </button>
         </div>
+
+        {/* Mobile Navigation Menu */}
+        {isMenuOpen && (
+          <nav className="md:hidden border-t border-gray-200 py-4">
+            <div className="flex flex-col space-y-4">
+              <Link 
+                href="/" 
+                className="text-gray-600 hover:text-gray-900 transition-colors px-2 py-1 rounded-md hover:bg-gray-100"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Home
+              </Link>
+              <Link 
+                href="/blog" 
+                className="text-gray-600 hover:text-gray-900 transition-colors px-2 py-1 rounded-md hover:bg-gray-100"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Blog
+              </Link>
+              <Link 
+                href="/about" 
+                className="text-gray-600 hover:text-gray-900 transition-colors px-2 py-1 rounded-md hover:bg-gray-100"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                About
+              </Link>
+              <a 
+                href="http://localhost:3333" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-gray-600 hover:text-gray-900 transition-colors px-2 py-1 rounded-md hover:bg-gray-100"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Studio
+              </a>
+            </div>
+          </nav>
+        )}
       </div>
     </header>
   )

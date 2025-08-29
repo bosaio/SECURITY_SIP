@@ -1,26 +1,19 @@
 {
+  "polyfillFiles": [
+    "static/chunks/polyfills.js"
+  ],
+  "devFiles": [],
+  "ampDevFiles": [],
+  "lowPriorityFiles": [
+    "static/development/_buildManifest.js",
+    "static/development/_ssgManifest.js"
+  ],
+  "rootMainFiles": [
+    "static/chunks/webpack.js",
+    "static/chunks/main-app.js"
+  ],
   "pages": {
     "/_app": []
   },
-  "devFiles": [],
-  "ampDevFiles": [],
-  "polyfillFiles": [
-    "static/chunks/252f0_next_dist_build_polyfills_polyfill-nomodule.js"
-  ],
-  "lowPriorityFiles": [
-    "static/development/_ssgManifest.js",
-    "static/development/_buildManifest.js"
-  ],
-  "rootMainFiles": [
-    "static/chunks/[turbopack]_browser_dev_hmr-client_hmr-client_ts_b346b75c._.js",
-    "static/chunks/252f0_next_dist_compiled_react-dom_5b7ec348._.js",
-    "static/chunks/252f0_next_dist_compiled_next-devtools_index_528c751d.js",
-    "static/chunks/252f0_next_dist_compiled_a455282d._.js",
-    "static/chunks/252f0_next_dist_client_cc68d310._.js",
-    "static/chunks/252f0_next_dist_11f403d2._.js",
-    "static/chunks/252f0_@swc_helpers_cjs_aa4faa20._.js",
-    "static/chunks/sandbox_SECURITY_SIP_client_a0ff3932._.js",
-    "static/chunks/turbopack-sandbox_SECURITY_SIP_client_921b06d2._.js"
-  ],
   "ampFirstPages": []
 }

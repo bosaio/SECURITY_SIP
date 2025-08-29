@@ -3,8 +3,9 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import Link from "next/link"
+import { getLatestPosts } from "@/lib/sanity"
 
-export default function Home() {
+export default async function Home() {
   return (
     <div className="min-h-screen bg-gray-50">
       <div className="mx-auto max-w-4xl px-6 py-12">
@@ -29,16 +30,7 @@ export default function Home() {
               </Button>
             </Link>
           </div>
-          <div className="text-center py-12">
-            <p className="text-gray-600 text-lg mb-6">
-              No posts yet. Create your first post through the admin panel!
-            </p>
-            <Link href="/auth/signin">
-              <Button className="bg-blue-600 hover:bg-blue-700">
-                Sign In to Admin
-              </Button>
-            </Link>
-          </div>
+          <LatestPosts />
         </div>
 
         {/* Newsletter Subscription Section */}
@@ -65,4 +57,55 @@ export default function Home() {
       </div>
     </div>
   )
+}
+
+async function LatestPosts() {
+  try {
+    const posts = await getLatestPosts(3)
+    
+    if (!posts || posts.length === 0) {
+      return (
+        <div className="text-center py-12">
+          <p className="text-gray-600 text-lg mb-6">
+            No posts yet. Create your first post through the Sanity Studio!
+          </p>
+          <a href="http://localhost:3333" target="_blank" rel="noopener noreferrer">
+            <Button className="bg-blue-600 hover:bg-blue-700">
+              Open Sanity Studio
+            </Button>
+          </a>
+        </div>
+      )
+    }
+
+    return (
+      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        {posts.map((post: any) => (
+          <Card key={post._id} className="hover:shadow-lg transition-shadow">
+            <CardHeader>
+              <CardTitle className="text-lg leading-tight">{post.title}</CardTitle>
+              <CardDescription className="line-clamp-2">{post.description}</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div className="flex items-center justify-between text-sm text-gray-500">
+                <span>{post.publishedAt ? new Date(post.publishedAt).toLocaleDateString() : 'Draft'}</span>
+                <Link href={`/blog/${post.slug.current}`} className="text-blue-600 hover:text-blue-800 font-medium hover:underline">
+                  Read more →
+                </Link>
+              </div>
+            </CardContent>
+          </Card>
+        ))}
+      </div>
+    )
+  } catch (error) {
+    console.error('Error fetching latest posts:', error)
+    return (
+      <div className="text-center py-12">
+        <p className="text-gray-600 text-lg mb-6">
+          Error loading posts. Please try again later.
+        </p>
+      </div>
+    )
+  }
 }

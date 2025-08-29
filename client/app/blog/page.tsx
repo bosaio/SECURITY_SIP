@@ -1,7 +1,8 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import Link from "next/link"
+import { getAllPosts } from "@/lib/sanity"
 
-export default function BlogPage() {
+export default async function BlogPage() {
   return (
     <div className="min-h-screen bg-gray-50">
       <div className="mx-auto max-w-6xl px-6 py-12">
@@ -14,16 +15,7 @@ export default function BlogPage() {
         </div>
 
         {/* Blog Posts Grid */}
-        <div className="text-center py-12">
-          <p className="text-gray-600 text-lg mb-6">
-            No blog posts yet. Create your first post through the admin panel!
-          </p>
-          <Link href="/auth/signin">
-            <button className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium transition-colors">
-              Sign In to Admin
-            </button>
-          </Link>
-        </div>
+        <BlogPostsGrid />
 
         {/* Newsletter CTA */}
         <div className="mt-16 text-center">
@@ -51,4 +43,62 @@ export default function BlogPage() {
       </div>
     </div>
   )
+}
+
+async function BlogPostsGrid() {
+  try {
+    const posts = await getAllPosts()
+    
+    if (!posts || posts.length === 0) {
+      return (
+        <div className="text-center py-12">
+          <p className="text-gray-600 text-lg mb-6">
+            No blog posts yet. Create your first post through the Sanity Studio!
+          </p>
+          <a href="http://localhost:3333" target="_blank" rel="noopener noreferrer">
+            <button className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium transition-colors">
+              Open Sanity Studio
+            </button>
+          </a>
+        </div>
+      )
+    }
+
+    return (
+      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        {posts.map((post: any) => (
+          <Card key={post._id} className="hover:shadow-lg transition-shadow">
+            <CardHeader>
+              <CardTitle className="text-lg leading-tight">
+                <Link href={`/blog/${post.slug.current}`} className="hover:text-blue-600 transition-colors">
+                  {post.title}
+                </Link>
+              </CardTitle>
+              <CardDescription className="line-clamp-2">{post.description}</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div className="flex items-center justify-between text-sm text-gray-500">
+                <span>{post.publishedAt ? new Date(post.publishedAt).toLocaleDateString() : 'Draft'}</span>
+                <Link 
+                  href={`/blog/${post.slug.current}`}
+                  className="text-blue-600 hover:text-blue-800 font-medium hover:underline"
+                >
+                  Read more →
+                </Link>
+              </div>
+            </CardContent>
+          </Card>
+        ))}
+      </div>
+    )
+  } catch (error) {
+    console.error('Error fetching blog posts:', error)
+    return (
+      <div className="text-center py-12">
+        <p className="text-gray-600 text-lg mb-6">
+          Error loading blog posts. Please try again later.
+        </p>
+      </div>
+    )
+  }
 }
