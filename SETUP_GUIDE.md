@@ -108,7 +108,7 @@ This guide will walk you through setting up the separated client-server architec
    ```
 
    This creates:
-   - Admin user: `admin@securitysip.com` / `admin123`
+   - Admin user: `admin@securitysip.com` / `your_secure_password_here`
    - Initial categories (Application Security, API Security, etc.)
    - Initial tags (security, cybersecurity, web, etc.)
 
@@ -133,7 +133,7 @@ This guide will walk you through setting up the separated client-server architec
 1. **Navigate to sign-in page**: http://localhost:3000/auth/signin
 2. **Use default admin credentials**:
    - **Email**: `admin@securitysip.com`
-   - **Password**: `admin123`
+   - **Password**: `your_secure_password_here`
 3. **You'll be redirected to admin panel** after successful login
 
 ⚠️ **Important**: Change the default password after first login!

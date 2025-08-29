@@ -7,8 +7,8 @@ export default defineConfig({
   name: 'default',
   title: 'Security SIP',
 
-  projectId: 'rb9cpc3o',
-  dataset: 'production',
+  projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || '',
+  dataset: process.env.NEXT_PUBLIC_SANITY_DATASET || 'production',
 
   plugins: [structureTool(), visionTool()],
 

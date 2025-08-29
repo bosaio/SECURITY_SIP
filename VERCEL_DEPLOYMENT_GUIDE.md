@@ -8,7 +8,7 @@ Create a `.env.local` file in your `client` directory with:
 
 ```bash
 # Sanity Configuration
-NEXT_PUBLIC_SANITY_PROJECT_ID=rb9cpc3o
+NEXT_PUBLIC_SANITY_PROJECT_ID=your_sanity_project_id_here
 NEXT_PUBLIC_SANITY_DATASET=production
 NEXT_PUBLIC_SANITY_API_VERSION=2024-08-27
 
@@ -57,7 +57,7 @@ Add these environment variables in your Vercel project settings:
 
 | Variable | Value | Description |
 |----------|-------|-------------|
-| `NEXT_PUBLIC_SANITY_PROJECT_ID` | `rb9cpc3o` | Your Sanity project ID |
+| `NEXT_PUBLIC_SANITY_PROJECT_ID` | `your_sanity_project_id_here` | Your Sanity project ID |
 | `NEXT_PUBLIC_SANITY_DATASET` | `production` | Your Sanity dataset |
 | `NEXT_PUBLIC_SANITY_API_VERSION` | `2024-08-27` | Sanity API version |
 | `NEXT_PUBLIC_SITE_URL` | `https://your-domain.vercel.app` | Your Vercel domain |

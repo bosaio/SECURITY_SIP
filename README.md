@@ -49,7 +49,7 @@ SECURITY_SIP/
 3. **Set up environment variables**
    Create `client/.env.local`:
    ```env
-   NEXT_PUBLIC_SANITY_PROJECT_ID=rb9cpc3o
+   NEXT_PUBLIC_SANITY_PROJECT_ID=your_sanity_project_id_here
    NEXT_PUBLIC_SANITY_DATASET=production
    ```
 
