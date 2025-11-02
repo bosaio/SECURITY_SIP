@@ -42,3 +42,28 @@ next-env.d.ts
 
 /lib/generated/prisma
 sanity.config.ts
+
+# sample/test files (not needed for deployment)
+sample-blog-post*.md
+HOW-TO-ADD-SAMPLE-POSTS.md
+
+# IDE and editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# logs
+*.log
+
+# temporary files
+*.tmp
+*.temp
+.cache/
+
+# client-specific files not needed for Vercel deployment
+/client/app/api/newsletter/debug/
+/client/app/api/newsletter/test-email/
+/client/app/api/newsletter/test-gmail/
+/client/sanity/schemas/
