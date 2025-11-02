@@ -1,9 +1,9 @@
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
 import Link from "next/link"
 import { getLatestPosts } from "@/lib/sanity"
+import { CTAButton, NewsletterCTA, BlogCTA, SecurityGuideCTA } from "@/components/cta-button"
+import { NewsletterSubscription } from "@/components/newsletter-subscription"
 
 export default async function Home() {
   return (
@@ -18,6 +18,12 @@ export default async function Home() {
             Follow my journey from Fullstack developer to securing a role in the cybersecurity industry. 
             I share knowledge and insights gained through a hands-on approach to learning.
           </p>
+          
+          {/* Hero CTA Buttons */}
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mt-8">
+            <BlogCTA />
+            <SecurityGuideCTA />
+          </div>
         </div>
 
         {/* Latest Posts Section */}
@@ -33,27 +39,39 @@ export default async function Home() {
           <LatestPosts />
         </div>
 
-        {/* Newsletter Subscription Section */}
-        <Card className="bg-white border-2 border-gray-200">
-          <CardHeader className="text-center pb-4">
-            <CardTitle className="text-2xl font-bold text-gray-900">
-              Stay updated on my journey
-            </CardTitle>
-          </CardHeader>
-          <CardContent className="text-center pb-6">
-            <p className="text-gray-600 mb-6">Subscribe to the mailing list</p>
-            <div className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
-              <Input 
-                type="email" 
-                placeholder="Enter your email" 
-                className="flex-1"
+        {/* Call-to-Action Section */}
+        <div className="mb-16 text-center">
+          <div className="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-2xl p-12 border border-blue-100">
+            <h2 className="text-3xl font-bold text-gray-900 mb-4">
+              Ready to Level Up Your Security Game?
+            </h2>
+            <p className="text-lg text-gray-600 mb-8 max-w-2xl mx-auto">
+              Join me on this cybersecurity journey and get access to exclusive insights, 
+              practical guides, and real-world security lessons.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+              <CTAButton
+                text="Start Learning Now"
+                href="/blog"
+                variant="primary"
+                icon="zap"
+                size="lg"
+                className="px-10 py-4"
               />
-              <Button className="bg-gray-700 hover:bg-gray-800 text-white px-8">
-                SUBSCRIBE
-              </Button>
+              <CTAButton
+                text="Get Free Security Guide"
+                href="/security-guide"
+                variant="outline"
+                icon="download"
+                size="lg"
+                className="px-10 py-4"
+              />
             </div>
-          </CardContent>
-        </Card>
+          </div>
+        </div>
+
+        {/* Newsletter Subscription Section */}
+        <NewsletterSubscription />
       </div>
     </div>
   )

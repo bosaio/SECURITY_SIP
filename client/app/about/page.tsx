@@ -151,13 +151,26 @@ export default function AboutPage() {
                 <span className="text-gray-700">CompTIA Security+ (In Progress)</span>
               </div>
               <div className="flex items-center space-x-3">
+                <div className="w-3 h-3 bg-green-500 rounded-full"></div>
+                <span className="text-gray-700">Network+ (In Progress)</span>
+              </div>
+              <div className="flex items-center space-x-3">
+                <div className="w-3 h-3 bg-green-500 rounded-full"></div>
+                <span className="text-gray-700">Linux (In Progress)</span>
+              </div>
+              <div className="flex items-center space-x-3">
+                <div className="w-3 h-3 bg-green-500 rounded-full"></div>
+                <span className="text-gray-700">CCNA (In Progress)</span>
+              </div>
+              {/* <div className="flex items-center space-x-3">
                 <div className="w-3 h-3 bg-blue-500 rounded-full"></div>
                 <span className="text-gray-700">AWS Certified Developer</span>
               </div>
+
               <div className="flex items-center space-x-3">
                 <div className="w-3 h-3 bg-blue-500 rounded-full"></div>
                 <span className="text-gray-700">Microsoft Certified: Azure Developer</span>
-              </div>
+              </div> */}
             </CardContent>
           </Card>
           
@@ -199,11 +212,11 @@ export default function AboutPage() {
                   Read My Blog
                 </Button>
               </Link>
-              <Link href="/auth/signin">
+              {/* <Link href="/auth/signin">
                 <Button variant="outline" className="border-blue-300 text-blue-700 hover:bg-blue-50 px-6">
                   Access Admin Panel
                 </Button>
-              </Link>
+              </Link> */}
             </div>
           </CardContent>
         </Card>

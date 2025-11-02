@@ -244,7 +244,7 @@ export default function BlogForm({ post, onSubmit, onCancel, isLoading = false }
         <CardContent className="space-y-4">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="space-y-2">
-              <Label>Icon</Label>
+              <Label htmlFor="icon">Icon</Label>
               <div className="grid grid-cols-8 gap-2">
                 {iconOptions.map((icon) => (
                   <button
@@ -264,7 +264,7 @@ export default function BlogForm({ post, onSubmit, onCancel, isLoading = false }
             </div>
             
             <div className="space-y-2">
-              <Label>Color Theme</Label>
+              <Label htmlFor="color">Color Theme</Label>
               <div className="grid grid-cols-3 gap-2">
                 {colorOptions.map((color) => (
                   <button

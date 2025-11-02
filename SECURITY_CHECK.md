@@ -3,21 +3,21 @@
 ## ✅ **COMPLETED SECURITY FIXES**
 
 ### 1. **Hardcoded Credentials Removed**
-- [x] Removed hardcoded Sanity project ID `rb9cpc3o` from all files
+- [x] Removed hardcoded Sanity project ID `[PROJECT_ID]` from all files
 - [x] Replaced with environment variables in:
-  - `client/sanity.config.ts`
-  - `client/lib/sanity.ts`
+  - `[CLIENT_PATH]/sanity.config.ts`
+  - `[CLIENT_PATH]/lib/sanity.ts`
   - `sanity.config.ts`
 - [x] Updated documentation files to use placeholder values
 
 ### 2. **Environment Variables Secured**
-- [x] Created `client/.env.example` with placeholder values
+- [x] Created `[CLIENT_PATH]/.env.example` with placeholder values
 - [x] Created `.env.example` with placeholder values
 - [x] Removed actual `.env.local` file containing real credentials
 - [x] All sensitive values now use `process.env` variables
 
 ### 3. **Build Artifacts Cleaned**
-- [x] Removed `client/.next/` directory
+- [x] Removed `[CLIENT_PATH]/.next/` directory
 - [x] Removed `.next/` directory
 - [x] No compiled code with environment variable references
 
@@ -50,7 +50,7 @@ Run these commands to verify security:
 
 ```bash
 # Check for any remaining hardcoded project IDs
-grep -r "rb9cpc3o" . --exclude-dir=node_modules --exclude-dir=.git
+grep -r "[PROJECT_ID]" . --exclude-dir=node_modules --exclude-dir=.git
 
 # Check for any .env files
 find . -name ".env*" -type f
@@ -72,7 +72,7 @@ grep -r -i "api.*key\|token\|secret\|password" . --exclude-dir=node_modules --ex
 4. [ ] Verify no sensitive data appears in git status
 
 ### **Environment Setup for Development**
-1. [ ] Copy `client/.env.example` to `client/.env.local`
+1. [ ] Copy `[CLIENT_PATH]/.env.example` to `[CLIENT_PATH]/.env.local`
 2. [ ] Copy `.env.example` to `.env`
 3. [ ] Fill in actual values in local environment files
 4. [ ] Test application functionality
