@@ -46,10 +46,12 @@ Your Sanity Studio is already configured for production deployment.
 ### 2. **Configure Build Settings**
 
 **Framework Preset**: Next.js
-**Root Directory**: `client`
-**Build Command**: `npm run build`
-**Output Directory**: `.next`
-**Install Command**: `npm install`
+**Root Directory**: `client` ⚠️ **CRITICAL: Set this to `client` in Vercel dashboard**
+**Build Command**: `npm run build` (auto-detected)
+**Output Directory**: `.next` (auto-detected)
+**Install Command**: `npm install --legacy-peer-deps` (handles dependency conflicts)
+
+**Important**: The `vercel.json` file in the root has been configured to handle peer dependency conflicts. Make sure the Root Directory is set to `client` in your Vercel project settings.
 
 ### 3. **Environment Variables in Vercel**
 
@@ -124,10 +126,31 @@ Add Google Analytics to track blog engagement.
 
 ## 🚨 **Troubleshooting Common Issues**
 
-### 1. **Build Failures**
+### 1. **Dependency Conflict Errors (ERESOLVE)**
+
+If you see errors like:
+```
+npm error ERESOLVE could not resolve
+npm error peer @sanity/icons@"^2.8" from next-sanity@7.1.4
+```
+
+**Solution:**
+- ✅ **Root Directory MUST be set to `client`** in Vercel project settings
+- ✅ The `client/.npmrc` file with `legacy-peer-deps=true` handles this
+- ✅ The `client/vercel.json` has `installCommand: "npm install --legacy-peer-deps"`
+- ⚠️ If Root Directory is NOT set to `client`, Vercel will try to install from root and fail
+
+**To fix in Vercel:**
+1. Go to Project Settings → General
+2. Under "Root Directory", click "Edit"
+3. Set it to `client`
+4. Save and redeploy
+
+### 2. **Build Failures**
 ```bash
 # Check for TypeScript errors
-npm run type-check
+cd client
+npm run build
 
 # Check for linting errors
 npm run lint
@@ -137,17 +160,17 @@ rm -rf .next
 npm run build
 ```
 
-### 2. **Environment Variable Issues**
+### 3. **Environment Variable Issues**
 - Ensure all variables start with `NEXT_PUBLIC_` for client-side access
 - Check Vercel environment variable settings
 - Verify variable names match exactly
 
-### 3. **Sanity Connection Issues**
+### 4. **Sanity Connection Issues**
 - Verify project ID and dataset are correct
 - Check CORS settings in Sanity
 - Ensure API version is current
 
-### 4. **Performance Issues**
+### 5. **Performance Issues**
 - Enable Vercel Edge Functions
 - Optimize images and assets
 - Use Next.js Image component
