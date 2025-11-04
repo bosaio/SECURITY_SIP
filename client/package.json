@@ -28,7 +28,8 @@
     "react-dom": "^18",
     "sanity": "^3.23.0",
     "sonner": "^1.2.0",
-    "tailwind-merge": "^2.0.0"
+    "tailwind-merge": "^2.0.0",
+    "tailwindcss-animate": "^1.0.7"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4.1.16",
