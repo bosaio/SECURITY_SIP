@@ -22,7 +22,7 @@ export default async function Home() {
           {/* Hero CTA Buttons */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mt-8">
             <BlogCTA />
-            <SecurityGuideCTA />
+            {/* <SecurityGuideCTA /> */}
           </div>
         </div>
 
@@ -58,14 +58,14 @@ export default async function Home() {
                 size="lg"
                 className="px-10 py-4"
               />
-              <CTAButton
+              {/* <CTAButton
                 text="Get Free Security Guide"
                 href="/security-guide"
                 variant="outline"
                 icon="download"
                 size="lg"
                 className="px-10 py-4"
-              />
+              /> */}
             </div>
           </div>
         </div>
