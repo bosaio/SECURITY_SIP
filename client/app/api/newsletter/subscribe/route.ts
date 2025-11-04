@@ -27,8 +27,13 @@ export async function POST(request: NextRequest) {
     // Check if already subscribed
     if (newsletterStore.hasSubscriber(email)) {
       return NextResponse.json(
-        { error: 'Email is already subscribed' },
-        { status: 409 }
+        { 
+          message: 'This email is already subscribed to the newsletter.',
+          email: email,
+          alreadySubscribed: true,
+          timestamp: new Date().toISOString()
+        },
+        { status: 200 }
       )
     }
 

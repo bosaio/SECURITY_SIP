@@ -14,19 +14,31 @@ Your newsletter subscription system now uses **Nodemailer** to handle email func
 
 ### **Option 1: Gmail (Recommended for Testing)**
 
+**⚠️ IMPORTANT: Gmail requires an App Password, NOT your regular Gmail password!**
+
+If you see the error: `"534-5.7.9 Application-specific password required"`, you need to:
+
 1. **Enable 2-Factor Authentication** on your Gmail account
+   - Go to [Google Account Security](https://myaccount.google.com/security)
+   - Click "2-Step Verification" and enable it
+
 2. **Generate App Password**:
-   - Go to Google Account Settings
-   - Security → 2-Step Verification → App passwords
-   - Generate password for "Mail"
-3. **Update Environment Variables**:
+   - Go to [Google Account → App Passwords](https://myaccount.google.com/apppasswords)
+   - Or: Google Account → Security → 2-Step Verification → App passwords
+   - Select "Mail" as the app and "Other" as the device
+   - Name it "Security SIP Newsletter" (or any name you prefer)
+   - Click "Generate"
+   - **Copy the 16-character password** (it will look like: `abcd efgh ijkl mnop`)
+
+3. **Update Environment Variables** in `client/.env.local`:
 
 ```bash
-# In client/.env.local
 EMAIL_USER=your_email@gmail.com
-EMAIL_PASSWORD=your_16_character_app_password
+EMAIL_PASSWORD=abcdefghijklmnop  # Use the 16-char app password (no spaces)
 EMAIL_SERVICE=gmail
 ```
+
+**Note:** The app password will be 16 characters without spaces. Use it exactly as shown.
 
 ### **Option 2: Outlook/Hotmail**
 
@@ -60,7 +72,33 @@ SMTP_SECURE=false
 
 ## 🔧 **Testing Your Email Configuration**
 
-### **1. Test Connection**
+Make sure your dev server is running (`npm run dev` in the `client` folder) before running these tests.
+
+### **1. Check Configuration Status**
+```bash
+curl http://localhost:3000/api/newsletter/debug
+```
+
+**Expected Response:**
+```json
+{
+  "status": "success",
+  "message": "Nodemailer service debug information",
+  "timestamp": "2025-08-31T16:11:20.686Z",
+  "environment": {
+    "EMAIL_USER": "Set",
+    "EMAIL_PASSWORD": "Set",
+    "EMAIL_SERVICE": "gmail",
+    "NODE_ENV": "development"
+  },
+  "service": {
+    "isConfigured": true,
+    "hasTransporter": true
+  }
+}
+```
+
+### **2. Test Email Connection**
 ```bash
 curl http://localhost:3000/api/newsletter/test-email
 ```
@@ -74,18 +112,83 @@ curl http://localhost:3000/api/newsletter/test-email
 }
 ```
 
-### **2. Test Email Sending**
+**Expected Response (Error - if credentials are wrong):**
+```json
+{
+  "status": "error",
+  "message": "Email connection test failed",
+  "timestamp": "2025-08-31T16:11:20.686Z"
+}
+```
+
+### **3. Test Email Sending**
+Send a test welcome email to your email address:
+
 ```bash
 curl -X POST http://localhost:3000/api/newsletter/test-email \
   -H "Content-Type: application/json" \
-  -d '{"testEmail":"your_email@example.com"}'
+  -d '{"testEmail":"orobosa@gmail.com"}'
 ```
 
-### **3. Test Newsletter Subscription**
+**Expected Response (Success):**
+```json
+{
+  "status": "success",
+  "message": "Test email sent successfully",
+  "email": "your_email@example.com",
+  "timestamp": "2025-08-31T16:11:20.686Z"
+}
+```
+
+### **4. Test Newsletter Subscription**
+Test the full newsletter subscription flow:
+
 ```bash
 curl -X POST http://localhost:3000/api/newsletter/subscribe \
   -H "Content-Type: application/json" \
   -d '{"email":"test@example.com"}'
+```
+
+**Expected Response (Success):**
+```json
+{
+  "message": "Successfully subscribed to newsletter! Check your email for confirmation.",
+  "email": "test@example.com",
+  "timestamp": "2025-08-31T16:11:20.686Z"
+}
+```
+
+### **5. Quick Test Script**
+Create a file `test-email.sh` in your project root:
+
+```bash
+#!/bin/bash
+
+echo "🧪 Testing Nodemailer Configuration..."
+echo ""
+
+echo "1️⃣ Checking configuration..."
+curl -s http://localhost:3000/api/newsletter/debug | jq '.'
+echo ""
+
+echo "2️⃣ Testing connection..."
+curl -s http://localhost:3000/api/newsletter/test-email | jq '.'
+echo ""
+
+echo "3️⃣ Sending test email..."
+read -p "Enter your email address: " email
+curl -s -X POST http://localhost:3000/api/newsletter/test-email \
+  -H "Content-Type: application/json" \
+  -d "{\"testEmail\":\"$email\"}" | jq '.'
+echo ""
+
+echo "✅ Test complete! Check your inbox."
+```
+
+Make it executable and run:
+```bash
+chmod +x test-email.sh
+./test-email.sh
 ```
 
 ## 📋 **Current Environment Variables**
@@ -140,10 +243,12 @@ EMAIL_SERVICE=gmail
    - Verify email service configuration
    - Check if 2FA is enabled (Gmail)
 
-2. **"Authentication failed"**
-   - Use App Password instead of regular password
-   - Check if account allows "less secure apps"
-   - Verify SMTP settings
+2. **"Authentication failed" or "Application-specific password required"**
+   - ✅ **You MUST use a Gmail App Password, not your regular password**
+   - Go to [Google App Passwords](https://myaccount.google.com/apppasswords) to generate one
+   - Make sure 2-Factor Authentication is enabled first
+   - Use the 16-character app password (remove spaces if present)
+   - The error `534-5.7.9 Application-specific password required` means you're using your regular password
 
 3. **"Connection timeout"**
    - Check firewall settings
