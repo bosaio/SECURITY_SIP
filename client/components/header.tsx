@@ -2,11 +2,11 @@
 
 import Link from "next/link"
 import { useState, useMemo } from "react"
-import { getStudioUrl } from "@/lib/utils"
+// import { getStudioUrl } from "@/lib/utils"
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
-  const studioUrl = useMemo(() => getStudioUrl(), [])
+  // const studioUrl = useMemo(() => getStudioUrl(), [])
 
   return (
     <header className="bg-white shadow-sm border-b border-gray-200">
@@ -32,9 +32,9 @@ export default function Header() {
             <Link href="/about" className="text-gray-600 hover:text-gray-900 transition-colors">
               About
             </Link>
-            <a href={studioUrl} target="_blank" rel="noopener noreferrer" className="text-gray-600 hover:text-gray-900 transition-colors">
+            {/* <a href={studioUrl} target="_blank" rel="noopener noreferrer" className="text-gray-600 hover:text-gray-900 transition-colors">
               Studio
-            </a>
+            </a> */}
           </nav>
 
           {/* Mobile Menu Button */}
