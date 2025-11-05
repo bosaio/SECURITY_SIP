@@ -3,6 +3,9 @@ import Link from "next/link"
 import { getAllPosts } from "@/lib/sanity"
 import { getStudioUrl } from "@/lib/utils"
 
+// Force dynamic rendering to fetch fresh data from Sanity
+export const dynamic = 'force-dynamic'
+
 export default async function BlogPage() {
   return (
     <div className="min-h-screen bg-gray-50">

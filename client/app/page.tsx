@@ -6,6 +6,9 @@ import { CTAButton, NewsletterCTA, BlogCTA, SecurityGuideCTA } from "@/component
 import { NewsletterSubscription } from "@/components/newsletter-subscription"
 import { getStudioUrl } from "@/lib/utils"
 
+// Force dynamic rendering to fetch fresh data from Sanity
+export const dynamic = 'force-dynamic'
+
 export default async function Home() {
   return (
     <div className="min-h-screen bg-gray-50">

@@ -5,6 +5,9 @@ import { notFound } from "next/navigation"
 import { getPostBySlug, getAllPosts } from "@/lib/sanity"
 import PortableTextRenderer from "@/components/PortableTextRenderer"
 
+// Force dynamic rendering to fetch fresh data from Sanity
+export const dynamic = 'force-dynamic'
+
 export default async function BlogPostPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params
   const post = await getPostBySlug(id)
