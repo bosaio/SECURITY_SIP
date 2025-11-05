@@ -1,12 +1,15 @@
 'use client'
 
 import { useEffect } from 'react'
+import { getStudioUrl } from '@/lib/utils'
 
 export default function StudioPage() {
+  const studioUrl = getStudioUrl()
+  
   useEffect(() => {
     // Redirect to the standalone Sanity Studio
-    window.location.href = 'http://localhost:3333'
-  }, [])
+    window.location.href = studioUrl
+  }, [studioUrl])
 
   return (
     <div className="min-h-screen bg-gray-50 flex items-center justify-center">
@@ -17,7 +20,7 @@ export default function StudioPage() {
         <p className="text-sm text-gray-500 mt-4">
           If you're not redirected automatically,{' '}
           <a 
-            href="http://localhost:3333" 
+            href={studioUrl} 
             className="text-blue-600 hover:text-blue-800 underline"
           >
             click here

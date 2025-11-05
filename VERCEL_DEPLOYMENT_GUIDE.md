@@ -12,6 +12,10 @@ NEXT_PUBLIC_SANITY_PROJECT_ID=your_sanity_project_id_here
 NEXT_PUBLIC_SANITY_DATASET=production
 NEXT_PUBLIC_SANITY_API_VERSION=2024-08-27
 
+# Sanity Studio URL (for production, use your deployed Studio URL)
+# For local development, this defaults to http://localhost:3333
+NEXT_PUBLIC_SANITY_STUDIO_URL=https://your-studio-domain.sanity.studio
+
 # Optional: Sanity API Token (only needed for write operations)
 # SANITY_API_TOKEN=your_token_here
 
@@ -62,6 +66,7 @@ Add these environment variables in your Vercel project settings:
 | `NEXT_PUBLIC_SANITY_PROJECT_ID` | `your_sanity_project_id_here` | Your Sanity project ID |
 | `NEXT_PUBLIC_SANITY_DATASET` | `production` | Your Sanity dataset |
 | `NEXT_PUBLIC_SANITY_API_VERSION` | `2024-08-27` | Sanity API version |
+| `NEXT_PUBLIC_SANITY_STUDIO_URL` | `https://your-studio-domain.sanity.studio` | Your deployed Sanity Studio URL |
 | `NEXT_PUBLIC_SITE_URL` | `https://your-domain.vercel.app` | Your Vercel domain |
 
 ### 4. **Deploy**
@@ -72,10 +77,25 @@ Click "Deploy" and wait for the build to complete!
 
 ### 1. **Update Sanity Studio Links**
 
-After deployment, update your Sanity Studio links to point to your production domain:
+After deployment, configure your Sanity Studio URL:
 
-- Update "Studio" links in your website
-- Update CORS settings in Sanity if needed
+1. **Deploy your Sanity Studio** (if not already deployed):
+   ```bash
+   cd security-sip
+   npm run deploy
+   ```
+   This will give you a URL like `https://your-project.sanity.studio`
+
+2. **Add the Studio URL to Vercel Environment Variables**:
+   - Go to your Vercel project settings
+   - Navigate to "Environment Variables"
+   - Add `NEXT_PUBLIC_SANITY_STUDIO_URL` with your Studio URL
+   - Value: `https://your-project.sanity.studio`
+   - Redeploy your application
+
+3. **Update CORS settings in Sanity** (if needed):
+   - Go to your Sanity project settings
+   - Add your Vercel domain to allowed origins
 
 ### 2. **Custom Domain (Optional)**
 

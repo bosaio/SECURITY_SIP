@@ -1,10 +1,12 @@
 'use client'
 
 import Link from "next/link"
-import { useState } from "react"
+import { useState, useMemo } from "react"
+import { getStudioUrl } from "@/lib/utils"
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const studioUrl = useMemo(() => getStudioUrl(), [])
 
   return (
     <header className="bg-white shadow-sm border-b border-gray-200">
@@ -30,7 +32,7 @@ export default function Header() {
             <Link href="/about" className="text-gray-600 hover:text-gray-900 transition-colors">
               About
             </Link>
-            <a href="http://localhost:3333" target="_blank" rel="noopener noreferrer" className="text-gray-600 hover:text-gray-900 transition-colors">
+            <a href={studioUrl} target="_blank" rel="noopener noreferrer" className="text-gray-600 hover:text-gray-900 transition-colors">
               Studio
             </a>
           </nav>
@@ -92,7 +94,7 @@ export default function Header() {
                 About
               </Link>
               <a 
-                href="http://localhost:3333" 
+                href={studioUrl} 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="text-gray-600 hover:text-gray-900 transition-colors px-2 py-1 rounded-md hover:bg-gray-100"

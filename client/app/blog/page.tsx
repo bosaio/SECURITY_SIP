@@ -1,6 +1,7 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import Link from "next/link"
 import { getAllPosts } from "@/lib/sanity"
+import { getStudioUrl } from "@/lib/utils"
 
 export default async function BlogPage() {
   return (
@@ -50,12 +51,13 @@ async function BlogPostsGrid() {
     const posts = await getAllPosts()
     
     if (!posts || posts.length === 0) {
+      const studioUrl = getStudioUrl()
       return (
         <div className="text-center py-12">
           <p className="text-gray-600 text-lg mb-6">
             No blog posts yet. Create your first post through the Sanity Studio!
           </p>
-          <a href="http://localhost:3333" target="_blank" rel="noopener noreferrer">
+          <a href={studioUrl} target="_blank" rel="noopener noreferrer">
             <button className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium transition-colors">
               Open Sanity Studio
             </button>
