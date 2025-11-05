@@ -2,11 +2,11 @@
 
 import Link from "next/link"
 import { useState, useMemo } from "react"
-// import { getStudioUrl } from "@/lib/utils"
+import { getStudioUrl } from "@/lib/utils"
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
-  // const studioUrl = useMemo(() => getStudioUrl(), [])
+  const studioUrl = useMemo(() => getStudioUrl(), [])
 
   return (
     <header className="bg-white shadow-sm border-b border-gray-200">
