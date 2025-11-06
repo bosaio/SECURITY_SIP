@@ -7,6 +7,8 @@ import PortableTextRenderer from "@/components/PortableTextRenderer"
 
 // Force dynamic rendering to fetch fresh data from Sanity
 export const dynamic = 'force-dynamic'
+export const revalidate = 0 // Disable caching completely
+export const dynamicParams = true // Allow dynamic params
 
 export default async function BlogPostPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params

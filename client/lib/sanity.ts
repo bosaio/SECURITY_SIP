@@ -5,8 +5,9 @@ export const client = createClient({
   projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || '',
   dataset: process.env.NEXT_PUBLIC_SANITY_DATASET || 'production',
   apiVersion: '2024-08-27', // Use today's date
-  useCdn: false, // Set to false for development, true for production
+  useCdn: false, // Always false to ensure fresh data (no CDN caching)
   token: process.env.SANITY_API_TOKEN, // Only needed for write operations
+  perspective: 'published', // Use published perspective
 })
 
 // Image URL builder
